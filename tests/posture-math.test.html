@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>Posture Math Tests</title>
+  </head>
+  <body>
+    <pre id="result">running</pre>
+    <script>
+      window.addEventListener("error", (event) => {
+        const result = document.querySelector("#result");
+        result.textContent = `FAIL: ${event.message}`;
+        window.__POSTURE_TEST_RESULT__ = { ok: false, message: event.message };
+      });
+      window.addEventListener("unhandledrejection", (event) => {
+        const result = document.querySelector("#result");
+        result.textContent = `FAIL: ${event.reason?.message ?? event.reason}`;
+        window.__POSTURE_TEST_RESULT__ = { ok: false, message: String(event.reason) };
+      });
+    </script>
+    <script type="module" src="./posture-math.test.js"></script>
+  </body>
+</html>
