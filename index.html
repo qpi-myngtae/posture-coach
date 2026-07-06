@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Posture Coach</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="stage" aria-label="webcam posture preview">
+        <div class="video-shell">
+          <video id="video" playsinline muted></video>
+          <canvas id="overlay"></canvas>
+          <div class="status-pill" id="statusPill">대기</div>
+        </div>
+      </section>
+
+      <aside class="panel" aria-label="posture controls">
+        <header class="panel-header">
+          <p class="eyebrow">Webcam AI</p>
+          <h1>Posture Coach</h1>
+        </header>
+
+        <div class="controls">
+          <button id="startButton" class="primary">카메라 시작</button>
+          <button id="calibrateButton" disabled>목표 자세 저장</button>
+          <button id="testAlertButton" disabled>알림 테스트</button>
+        </div>
+
+        <div class="setting">
+          <div class="setting-head">
+            <label for="threshold">민감도</label>
+            <output id="thresholdValue">0.18</output>
+          </div>
+          <input id="threshold" type="range" min="0.08" max="0.35" step="0.01" value="0.18" />
+        </div>
+
+        <div class="setting">
+          <div class="setting-head">
+            <label for="delay">알림 지연</label>
+            <output id="delayValue">5초</output>
+          </div>
+          <input id="delay" type="range" min="2" max="10" step="1" value="5" />
+        </div>
+
+        <dl class="metrics">
+          <div>
+            <dt>상태</dt>
+            <dd id="stateMetric">대기</dd>
+          </div>
+          <div>
+            <dt>이탈 점수</dt>
+            <dd id="scoreMetric">-</dd>
+          </div>
+          <div>
+            <dt>FPS</dt>
+            <dd id="fpsMetric">-</dd>
+          </div>
+          <div>
+            <dt>저장 샘플</dt>
+            <dd id="sampleMetric">0</dd>
+          </div>
+        </dl>
+
+        <div class="breakdown">
+          <div>
+            <span>머리</span>
+            <meter id="headMeter" min="0" max="0.35" value="0"></meter>
+          </div>
+          <div>
+            <span>어깨</span>
+            <meter id="shoulderMeter" min="0" max="0.35" value="0"></meter>
+          </div>
+          <div>
+            <span>상체</span>
+            <meter id="torsoMeter" min="0" max="0.35" value="0"></meter>
+          </div>
+        </div>
+
+        <p id="message" class="message">카메라를 시작하세요.</p>
+      </aside>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
